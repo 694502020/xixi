@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>给熙熙的小惊喜 🥚</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #FFB5C8;
+    --peach: #FFCBA4;
+    --yellow: #FFF0A0;
+    --mint: #B8F0D8;
+    --lavender: #D8C8FF;
+    --cream: #FFF8F0;
+    --deep-pink: #FF7FA8;
+    --deep-purple: #9B7FD4;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Ma Shan Zheng', cursive;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ===== FLOATING BACKGROUND SHAPES ===== */
+  .bg-blobs {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.35;
+    animation: blobFloat 8s ease-in-out infinite alternate;
+  }
+  .blob1 { width: 400px; height: 400px; background: var(--pink); top: -100px; left: -100px; animation-delay: 0s; }
+  .blob2 { width: 350px; height: 350px; background: var(--lavender); top: 30%; right: -80px; animation-delay: 2s; }
+  .blob3 { width: 300px; height: 300px; background: var(--peach); bottom: 10%; left: 20%; animation-delay: 4s; }
+  .blob4 { width: 250px; height: 250px; background: var(--mint); bottom: -50px; right: 10%; animation-delay: 1s; }
+  @keyframes blobFloat {
+    from { transform: translateY(0px) scale(1); }
+    to { transform: translateY(-30px) scale(1.05); }
+  }
+
+  /* ===== FLOATING PARTICLES ===== */
+  .particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .particle {
+    position: absolute;
+    font-size: 1.2rem;
+    animation: particleDrift linear infinite;
+    opacity: 0.6;
+  }
+  @keyframes particleDrift {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+  }
+
+  /* ===== MAIN WRAPPER ===== */
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    text-align: center;
+    padding: 40px 0 20px;
+    animation: fadeDown 0.8s ease both;
+  }
+  .header .tag {
+    display: inline-block;
+    background: var(--deep-pink);
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.75rem;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(255,127,168,0.4);
+  }
+  .header h1 {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 2.4rem;
+    color: var(--deep-pink);
+    line-height: 1.2;
+    text-shadow: 3px 3px 0 rgba(255,127,168,0.2);
+  }
+  .header .subtitle {
+    font-size: 1rem;
+    color: #aaa;
+    margin-top: 6px;
+    letter-spacing: 1px;
+  }
+
+  /* ===== EGG HERO ===== */
+  .egg-stage {
+    position: relative;
+    text-align: center;
+    margin: 10px 0 20px;
+    animation: fadeUp 0.9s ease 0.2s both;
+  }
+  .egg-container {
+    display: inline-block;
+    position: relative;
+  }
+  .egg-svg {
+    width: 160px;
+    height: 190px;
+    filter: drop-shadow(0 12px 30px rgba(255,127,168,0.35));
+    animation: eggBob 3s ease-in-out infinite;
+  }
+  @keyframes eggBob {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-12px) rotate(2deg); }
+  }
+  .egg-sparkles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .sparkle {
+    position: absolute;
+    font-size: 1.2rem;
+    animation: sparklePop 2s ease-in-out infinite;
+  }
+  .sparkle:nth-child(1) { top: 5%; left: 5%; animation-delay: 0s; }
+  .sparkle:nth-child(2) { top: 10%; right: 0%; animation-delay: 0.4s; }
+  .sparkle:nth-child(3) { bottom: 20%; left: -5%; animation-delay: 0.8s; }
+  .sparkle:nth-child(4) { bottom: 30%; right: -5%; animation-delay: 1.2s; }
+  @keyframes sparklePop {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+    50% { transform: scale(1.4) rotate(20deg); opacity: 1; }
+  }
+
+  /* ===== BLIND BOX CARD ===== */
+  .blindbox-card {
+    background: white;
+    border-radius: 28px;
+    padding: 28px 24px;
+    margin: 0 0 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(255,127,168,0.15), 0 2px 8px rgba(0,0,0,0.06);
+    animation: fadeUp 0.9s ease 0.35s both;
+  }
+  .blindbox-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--pink), var(--lavender), var(--peach), var(--mint));
+    border-radius: 28px 28px 0 0;
+  }
+  .blindbox-card .card-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  .blindbox-card .card-title {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 1.3rem;
+    color: var(--deep-pink);
+    margin-bottom: 12px;
+  }
+  .blindbox-card .card-text {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 1.15rem;
+    color: #666;
+    line-height: 2;
+  }
+  .highlight {
+    color: var(--deep-pink);
+    font-weight: bold;
+  }
+
+  /* ===== DATE BADGE ===== */
+  .date-section {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.9s ease 0.5s both;
+  }
+  .date-card {
+    flex: 1;
+    background: white;
+    border-radius: 20px;
+    padding: 18px 12px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(155,127,212,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .date-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    border-radius: 0 0 20px 20px;
+  }
+  .date-card:nth-child(1)::after { background: var(--deep-pink); }
+  .date-card:nth-child(2)::after { background: var(--deep-purple); }
+  .date-card .d-icon { font-size: 1.6rem; margin-bottom: 4px; }
+  .date-card .d-label { font-size: 0.7rem; color: #bbb; letter-spacing: 1px; margin-bottom: 4px; }
+  .date-card .d-value {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    color: #555;
+  }
+  .date-card .d-sub { font-size: 0.75rem; color: #ccc; margin-top: 2px; }
+
+  /* ===== COUNTER ===== */
+  .counter-card {
+    background: linear-gradient(135deg, #FFB5C8 0%, #D8C8FF 100%);
+    border-radius: 24px;
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 24px rgba(255,127,168,0.3);
+    animation: fadeUp 0.9s ease 0.6s both;
+    position: relative;
+    overflow: hidden;
+  }
+  .counter-card::before {
+    content: '🌸';
+    position: absolute;
+    font-size: 6rem;
+    opacity: 0.08;
+    top: -10px; right: -10px;
+  }
+  .counter-card .c-label {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .counter-card .c-number {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3.5rem;
+    color: white;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    line-height: 1;
+  }
+  .counter-card .c-unit {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.85);
+    margin-top: 4px;
+  }
+
+  /* ===== MESSAGE CARD ===== */
+  .msg-card {
+    background: white;
+    border-radius: 28px;
+    padding: 28px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 32px rgba(255,127,168,0.12);
+    animation: fadeUp 0.9s ease 0.7s both;
+    position: relative;
+  }
+  .msg-card .quote-mark {
+    font-family: 'Fredoka One', cursive;
+    font-size: 5rem;
+    color: var(--pink);
+    line-height: 0.5;
+    margin-bottom: 16px;
+    display: block;
+    opacity: 0.5;
+  }
+  .msg-card p {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 2.2;
+    text-align: justify;
+  }
+  .msg-card .sig {
+    text-align: right;
+    margin-top: 16px;
+    color: var(--deep-pink);
+    font-size: 1rem;
+  }
+
+  /* ===== BLINDBOX COLLECTION ===== */
+  .collection-title {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 1.1rem;
+    color: #888;
+    text-align: center;
+    margin-bottom: 14px;
+    letter-spacing: 2px;
+    animation: fadeUp 0.9s ease 0.8s both;
+  }
+  .toys-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.9s ease 0.9s both;
+  }
+  .toy-item {
+    background: white;
+    border-radius: 20px;
+    padding: 16px 8px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .toy-item:hover, .toy-item:active {
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 12px 28px rgba(255,127,168,0.25);
+  }
+  .toy-item .toy-emoji { font-size: 2.2rem; display: block; margin-bottom: 6px; }
+  .toy-item .toy-label { font-size: 0.7rem; color: #bbb; letter-spacing: 1px; }
+  .toy-item .toy-name { font-family: 'Ma Shan Zheng', cursive; font-size: 0.85rem; color: #777; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 20px 0;
+    animation: fadeUp 0.9s ease 1s both;
+  }
+  .footer .heart-row { font-size: 1.5rem; letter-spacing: 4px; margin-bottom: 8px; }
+  .footer p { font-family: 'Ma Shan Zheng', cursive; font-size: 0.9rem; color: #ccc; }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== CLICK HEARTS ===== */
+  .click-heart {
+    position: fixed;
+    pointer-events: none;
+    font-size: 1.5rem;
+    z-index: 999;
+    animation: heartFly 1s ease forwards;
+  }
+  @keyframes heartFly {
+    0% { transform: translateY(0) scale(0.5); opacity: 1; }
+    100% { transform: translateY(-80px) scale(1.2); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-blobs">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+</div>
+
+<div class="particles" id="particles"></div>
+
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="tag">✦ FOR 熙熙 ✦</div>
+    <h1>给曾芸熙的<br>小小惊喜 🥚</h1>
+    <p class="subtitle">一份来自蛋仔岛的心意</p>
+  </div>
+
+  <!-- EGG HERO -->
+  <div class="egg-stage">
+    <div class="egg-container">
+      <svg class="egg-svg" viewBox="0 0 160 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Egg body -->
+        <ellipse cx="80" cy="105" rx="68" ry="78" fill="#FFF0F5"/>
+        <ellipse cx="80" cy="105" rx="68" ry="78" fill="url(#eggGrad)" opacity="0.7"/>
+        <!-- Cheeks -->
+        <ellipse cx="48" cy="118" rx="14" ry="9" fill="#FFB5C8" opacity="0.7"/>
+        <ellipse cx="112" cy="118" rx="14" ry="9" fill="#FFB5C8" opacity="0.7"/>
+        <!-- Eyes -->
+        <ellipse cx="62" cy="100" rx="9" ry="11" fill="#3D2C2C"/>
+        <ellipse cx="98" cy="100" rx="9" ry="11" fill="#3D2C2C"/>
+        <ellipse cx="65" cy="97" rx="3" ry="3.5" fill="white"/>
+        <ellipse cx="101" cy="97" rx="3" ry="3.5" fill="white"/>
+        <!-- Smile -->
+        <path d="M68 120 Q80 132 92 120" stroke="#FF7FA8" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <!-- Little ears/hat -->
+        <ellipse cx="80" cy="30" rx="22" ry="16" fill="#FFB5C8"/>
+        <ellipse cx="80" cy="30" rx="14" ry="10" fill="#FF7FA8"/>
+        <!-- Star on hat -->
+        <text x="75" y="35" font-size="10" fill="white">★</text>
+        <!-- Shadow -->
+        <ellipse cx="80" cy="185" rx="45" ry="6" fill="#FFB5C8" opacity="0.2"/>
+        <defs>
+          <radialGradient id="eggGrad" cx="35%" cy="30%">
+            <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#FFB5C8" stop-opacity="0.3"/>
+          </radialGradient>
+        </defs>
+      </svg>
+      <div class="egg-sparkles">
+        <span class="sparkle">✨</span>
+        <span class="sparkle">⭐</span>
+        <span class="sparkle">🌸</span>
+        <span class="sparkle">💫</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORIGIN CARD -->
+  <div class="blindbox-card">
+    <div class="card-icon">🎮</div>
+    <div class="card-title">我们的故事</div>
+    <div class="card-text">
+      在蛋仔岛上，有一个叫 <span class="highlight">胡钰庚</span> 的蛋仔，
+      遇见了一个叫 <span class="highlight">曾芸熙</span> 的蛋仔。<br><br>
+      然后故事就从这里开始了。🥚💕
+    </div>
+  </div>
+
+  <!-- DATE BADGES -->
+  <div class="date-section">
+    <div class="date-card">
+      <div class="d-icon">🗓️</div>
+      <div class="d-label">在一起</div>
+      <div class="d-value">3月30日</div>
+      <div class="d-sub">我们的纪念日</div>
+    </div>
+    <div class="date-card">
+      <div class="d-icon">⏰</div>
+      <div class="d-label">那个时刻</div>
+      <div class="d-value">19:07</div>
+      <div class="d-sub">最重要的7分钟</div>
+    </div>
+  </div>
+
+  <!-- DAYS COUNTER -->
+  <div class="counter-card">
+    <div class="c-label">✦ 我们已经在一起 ✦</div>
+    <div class="c-number" id="dayCount">0</div>
+    <div class="c-unit">天 🌙</div>
+  </div>
+
+  <!-- MESSAGE -->
+  <div class="msg-card">
+    <span class="quote-mark">"</span>
+    <p>
+      熙熙，希望你每一天都开开心心的，
+      遇到烦恼的时候记得告诉我，
+      我虽然在屏幕的另一边，
+      但我的心一直在你旁边。<br><br>
+      你笑起来的样子，
+      是我最喜欢的画面。🌸
+    </p>
+    <div class="sig">— 钰庚 💌</div>
+  </div>
+
+  <!-- COLLECTION -->
+  <div class="collection-title">✦ 熙熙的专属盲盒 ✦</div>
+  <div class="toys-grid">
+    <div class="toy-item">
+      <span class="toy-emoji">🥚</span>
+      <div class="toy-label">SSR</div>
+      <div class="toy-name">蛋仔熙熙</div>
+    </div>
+    <div class="toy-item">
+      <span class="toy-emoji">🌸</span>
+      <div class="toy-label">SR</div>
+      <div class="toy-name">春日甜蜜</div>
+    </div>
+    <div class="toy-item">
+      <span class="toy-emoji">🌙</span>
+      <div class="toy-label">SR</div>
+      <div class="toy-name">晚安月亮</div>
+    </div>
+    <div class="toy-item">
+      <span class="toy-emoji">🎮</span>
+      <div class="toy-label">R</div>
+      <div class="toy-name">游戏搭子</div>
+    </div>
+    <div class="toy-item">
+      <span class="toy-emoji">💌</span>
+      <div class="toy-label">SSR</div>
+      <div class="toy-name">限定情书</div>
+    </div>
+    <div class="toy-item">
+      <span class="toy-emoji">🍡</span>
+      <div class="toy-label">R</div>
+      <div class="toy-name">甜甜糖串</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="heart-row">💗 💗 💗</div>
+    <p>点击任意地方有惊喜 ~</p>
+  </div>
+
+</div>
+
+<script>
+  // ===== DAY COUNTER =====
+  function calcDays() {
+    const start = new Date('2026-03-30T19:07:00');
+    const now = new Date();
+    const diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+    document.getElementById('dayCount').textContent = diff > 0 ? diff : 0;
+  }
+  calcDays();
+
+  // ===== PARTICLES =====
+  const emojis = ['🌸','✨','💫','⭐','🌷','💕','🥚','🎀'];
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 18; i++) {
+    const el = document.createElement('div');
+    el.className = 'particle';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 100 + '%';
+    el.style.animationDuration = (6 + Math.random() * 10) + 's';
+    el.style.animationDelay = (Math.random() * 12) + 's';
+    el.style.fontSize = (0.8 + Math.random() * 0.8) + 'rem';
+    container.appendChild(el);
+  }
+
+  // ===== CLICK HEARTS =====
+  const heartEmojis = ['💗','💖','💕','🌸','✨','💓'];
+  document.addEventListener('click', function(e) {
+    for (let i = 0; i < 3; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'click-heart';
+      heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+      heart.style.left = (e.clientX + (Math.random() - 0.5) * 40) + 'px';
+      heart.style.top = e.clientY + 'px';
+      heart.style.animationDelay = (i * 0.1) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1000);
+    }
+  });
+</script>
+</body>
+</html>
